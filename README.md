@@ -6,6 +6,6 @@
 6. Run migrations php artisan migrate --seed
 7. Start local server by executing php artisan serve
 8. Open new terminal and navigate to the react folder
-9. Copy react/.env.example into .env and adjust the VITE_BASE_API_URL parameter
+9. Copy frontend/.env.example into .env and adjust the VITE_BASE_API_URL parameter
 10. Run npm install
 11. Run npm run dev to start vite server for React
