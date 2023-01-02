@@ -21,7 +21,7 @@ Route::post('/signup', [AuthenticationController::class, 'createAccount']);
 Route::post('/signin', [AuthenticationController::class, 'signin']);
 Route::get('/quiz/all',[QuizController::class, 'getAllQuizzes']);
 Route::get('/quiz/details/{id}',[QuizController::class, 'getQuizDetails']);
-
+Route::get('/quiz/questions/{quiz}',[QuestionsController::class, 'getQuizQuestions']); 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
@@ -35,6 +35,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/admin/quiz/all',[QuizController::class, 'getAllQuizzesAdmin']);
     Route::get('/admin/quiz/update/{id}',[QuizController::class, 'makeApproved']);
     Route::post('/quiz/question/create',[QuestionsController::class, 'createQuestion']); 
-    Route::get('/quiz/questions/{quiz}',[QuestionsController::class, 'getQuizQuestions']); 
 
 });
