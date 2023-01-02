@@ -27,33 +27,31 @@ const MainPage = () => {
                             {quizes?.length === 0 && (
                                 <Alert variant="primary">No Items Yet</Alert>
                             )}
-                            {quizes?.map((product) => (
-                                <Link
-                                    to={`/myquizes/addquestions/${product.id}`}
-                                >
+                            {quizes?.map((quiz) => (
+                                <Link to={`/quiz/${quiz.id}`}>
                                     <Col>
                                         <Card>
                                             <Card.Img
                                                 variant="top"
-                                                src={product.image}
+                                                src={quiz.image}
                                                 width="300px"
                                                 height="300px"
                                             />
                                             <Card.Body>
                                                 <Card.Title>
-                                                    {product.title.substring(
+                                                    {quiz.title.substring(
                                                         0,
                                                         20
                                                     )}
                                                     ...
                                                 </Card.Title>
                                                 <Card.Text>
-                                                    {product.description}
+                                                    {quiz.description}
                                                 </Card.Text>
                                             </Card.Body>
                                             <Card.Footer>
                                                 <Card.Text>
-                                                    {product.created_at}
+                                                    {quiz.created_at}
                                                 </Card.Text>
                                             </Card.Footer>
                                         </Card>

@@ -44,4 +44,36 @@ class QuizController extends Controller
         ]);
     }
 
+    public function deleteMyQuizzes($id){
+        Quiz::where("id",$id)->delete();
+        return response()->json([
+            "message"=>"successfully deleted"
+        ]);
+    }
+
+    public function getAllQuizzesAdmin(){
+        $approved_quizzes = Quiz::where("is_approved",1)->get();
+        $unapproved_quizzes = Quiz::where("is_approved",0)->get();
+        return response()->json([
+            "approvedQuizzes"=>$approved_quizzes,
+            "unapprovedQuizzes"=>$unapproved_quizzes
+        ]);
+    }
+
+    public function makeApproved($id){
+        $quiz = Quiz::find($id);
+        $quiz->update(['is_approved' =>true]);
+        $quiz->save();
+        return response()->json([
+            "message"=>"successfully Updated"
+        ]);
+    }
+
+    public function getQuizDetails($id){
+        $quiz = Quiz::find($id)->first();
+        return response()->json([
+            "quiz"=>$quiz
+        ]);
+    }
+
 }

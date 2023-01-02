@@ -7,6 +7,8 @@ import Register from "./pages/Register";
 import MyQuizes from "./pages/MyQuizes";
 import CreateQuiz from "./pages/CreateQuiz";
 import AddQuestions from "./pages/AddQuestions";
+import AdminPanel from "./pages/AdminPanel";
+import QuizDetails from "./pages/QuizDetails";
 
 function App() {
     return (
@@ -14,12 +16,15 @@ function App() {
             <Menu />
             <Routes>
                 <Route path="/" element={<MainPage />} />
+                <Route path="/quiz/:id" element={<QuizDetails />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/myquizes" element={<MyQuizes />} />
                 <Route path="/myquizes/create" element={<CreateQuiz />} />
+
+                <Route path="/adminpanel" element={<AdminPanel />} />
                 <Route
-                    path="/myquizes/addquestions/:id"
+                    path="/myquizes/quiz/questions/:id"
                     element={<AddQuestions />}
                 />
             </Routes>

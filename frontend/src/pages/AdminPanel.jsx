@@ -1,37 +1,35 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Alert, Button, Card, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const MyQuizes = () => {
-    const [user, setUser] = useState(null);
-    const [quizes, setQuizes] = useState(null);
+const AdminPanel = () => {
+    const [activeQuizes, setActiveQuizes] = useState(null);
+    const [nonActiveQuizes, setNonActiveQuizes] = useState(null);
 
     useEffect(() => {
-        const userFromStorage = JSON.parse(localStorage.getItem("user"));
         const token = JSON.parse(localStorage.getItem("token"));
-        setUser(userFromStorage);
+
         const getMyQuizes = async () => {
             const { data } = await axios.get(
-                `${import.meta.env.VITE_BASE_API_URL}/quiz/${
-                    userFromStorage.id
-                }`,
+                `${import.meta.env.VITE_BASE_API_URL}/admin/quiz/all`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 }
             );
-            setQuizes(data?.quiz);
+            setActiveQuizes(data?.approvedQuizzes);
+            setNonActiveQuizes(data?.unapprovedQuizzes);
         };
         getMyQuizes();
     }, []);
 
-    const deleteHandler = (id) => {
+    const makeActiveHandler = (id) => {
         const token = JSON.parse(localStorage.getItem("token"));
-        const deleteMyQuizes = async () => {
+        const updateQuizToActive = async () => {
             const { data } = await axios.get(
-                `${import.meta.env.VITE_BASE_API_URL}/quiz/delete/${id}`,
+                `${import.meta.env.VITE_BASE_API_URL}/admin/quiz/update/${id}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -40,26 +38,67 @@ const MyQuizes = () => {
             );
             location.reload();
         };
-        deleteMyQuizes();
+        updateQuizToActive();
     };
 
     return (
         <div>
-            <Link className="m-5" to="/myquizes/create">
-                <Button variant="success">Create Quiz</Button>
-            </Link>
-
-            <h1 className="mt-5 text-center">My Quizes</h1>
-            <p className="mt-2 text-center mb-5">click to add questions</p>
-
+            <h1 className="mt-5 text-center">Non Active Quizes</h1>
             <Container>
                 <Row>
                     <Col>
                         <Row xs={1} md={3} className="g-4">
-                            {quizes?.length === 0 && (
+                            {nonActiveQuizes?.length === 0 && (
                                 <Alert variant="primary">No Items Yet</Alert>
                             )}
-                            {quizes?.map((quiz) => (
+                            {nonActiveQuizes?.map((quiz) => (
+                                <Col>
+                                    <Card>
+                                        <Card.Img
+                                            variant="top"
+                                            src={quiz.image}
+                                            width="300px"
+                                            height="300px"
+                                        />
+                                        <Card.Body>
+                                            <Card.Title>
+                                                {quiz.title}
+                                            </Card.Title>
+                                            <Card.Text>
+                                                {quiz.description}
+                                            </Card.Text>
+                                        </Card.Body>
+                                        <Card.Footer>
+                                            <Row md={3}>
+                                                <Button
+                                                    variant="success"
+                                                    onClick={() =>
+                                                        makeActiveHandler(
+                                                            quiz.id
+                                                        )
+                                                    }
+                                                >
+                                                    Make Active
+                                                </Button>
+                                            </Row>
+                                        </Card.Footer>
+                                    </Card>
+                                </Col>
+                            ))}
+                        </Row>
+                    </Col>
+                </Row>
+            </Container>
+
+            <h1 className="mt-5 text-center">Active Quizes</h1>
+            <Container>
+                <Row>
+                    <Col>
+                        <Row xs={1} md={3} className="g-4">
+                            {activeQuizes?.length === 0 && (
+                                <Alert variant="primary">No Items Yet</Alert>
+                            )}
+                            {activeQuizes?.map((quiz) => (
                                 <Col>
                                     <Card>
                                         <Card.Img
@@ -98,10 +137,10 @@ const MyQuizes = () => {
                                                     }
                                                 </Card.Text>
                                                 <Link
-                                                    to={`/myquizes/quiz/questions/${quiz.id}`}
+                                                    to={`/myquizes/addquestions/${quiz.id}`}
                                                 >
                                                     <Button variant="success">
-                                                        Details
+                                                        Questions
                                                     </Button>
                                                 </Link>
                                             </Row>
@@ -117,4 +156,4 @@ const MyQuizes = () => {
     );
 };
 
-export default MyQuizes;
+export default AdminPanel;

@@ -15,7 +15,7 @@ const CreateQuiz = () => {
         e.preventDefault();
 
         const createQuiz = async () => {
-            await axios.post(
+            const { data } = await axios.post(
                 `${import.meta.env.VITE_BASE_API_URL}/quiz/create`,
                 {
                     title,
@@ -30,7 +30,7 @@ const CreateQuiz = () => {
                 }
             );
 
-            navigate("/myquizes");
+            navigate(`/myquizes/quiz/questions/${data?.quiz?.id}`);
         };
 
         createQuiz();

@@ -29,7 +29,7 @@ const Register = () => {
                 localStorage.setItem("token", JSON.stringify(data.token));
                 localStorage.setItem("user", JSON.stringify(data.user));
                 if (data.token) {
-                    navigate("/");
+                    location.href("/");
                 }
             };
 

@@ -18,6 +18,8 @@ const Menu = () => {
 
             localStorage.removeItem("token");
             localStorage.removeItem("user");
+
+            window.location.reload();
         };
 
         logoutUser();

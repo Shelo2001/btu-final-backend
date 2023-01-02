@@ -13,7 +13,7 @@ class Quiz extends Model
         'title',
         'description',
         'image',
-        'user_id'
+        'user_id',"is_approved"
     ];
 
     public function User() {

@@ -19,6 +19,7 @@ use App\Http\Controllers\AuthenticationController;
 Route::post('/signup', [AuthenticationController::class, 'createAccount']);
 Route::post('/signin', [AuthenticationController::class, 'signin']);
 Route::get('/quiz/all',[QuizController::class, 'getAllQuizzes']);
+Route::get('/quiz/details/{id}',[QuizController::class, 'getQuizDetails']);
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -29,5 +30,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/logout', [AuthenticationController::class, 'signout']);
     Route::post('/quiz/create',[QuizController::class, 'createQuiz']);
     Route::get('/quiz/{user}',[QuizController::class, 'getMyQuizes']);
+    Route::get('/quiz/delete/{id}',[QuizController::class, 'deleteMyQuizzes']);
+    Route::get('/admin/quiz/all',[QuizController::class, 'getAllQuizzesAdmin']);
+    Route::get('/admin/quiz/update/{id}',[QuizController::class, 'makeApproved']);
 
 });
