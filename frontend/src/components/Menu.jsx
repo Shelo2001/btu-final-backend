@@ -19,7 +19,7 @@ const Menu = () => {
             localStorage.removeItem("token");
             localStorage.removeItem("user");
 
-            window.location.reload();
+            window.location.href = "/login";
         };
 
         logoutUser();

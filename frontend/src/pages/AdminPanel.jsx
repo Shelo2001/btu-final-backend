@@ -70,6 +70,13 @@ const AdminPanel = () => {
                                         </Card.Body>
                                         <Card.Footer>
                                             <Row md={3}>
+                                                <Link
+                                                    to={`/admin/quiz/questions/${quiz.id}`}
+                                                >
+                                                    <Button variant="success">
+                                                        See Questions
+                                                    </Button>
+                                                </Link>
                                                 <Button
                                                     variant="success"
                                                     onClick={() =>
@@ -117,14 +124,6 @@ const AdminPanel = () => {
                                         </Card.Body>
                                         <Card.Footer>
                                             <Row md={3}>
-                                                <Button
-                                                    variant="danger"
-                                                    onClick={() =>
-                                                        deleteHandler(quiz.id)
-                                                    }
-                                                >
-                                                    <i class="fa-solid fa-trash"></i>
-                                                </Button>
                                                 <Card.Text
                                                     style={{
                                                         textAlign: "center",
@@ -137,10 +136,10 @@ const AdminPanel = () => {
                                                     }
                                                 </Card.Text>
                                                 <Link
-                                                    to={`/myquizes/addquestions/${quiz.id}`}
+                                                    to={`/admin/quiz/questions/${quiz.id}`}
                                                 >
                                                     <Button variant="success">
-                                                        Questions
+                                                        See Questions
                                                     </Button>
                                                 </Link>
                                             </Row>

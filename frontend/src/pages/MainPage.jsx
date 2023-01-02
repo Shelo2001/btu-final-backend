@@ -39,11 +39,7 @@ const MainPage = () => {
                                             />
                                             <Card.Body>
                                                 <Card.Title>
-                                                    {quiz.title.substring(
-                                                        0,
-                                                        20
-                                                    )}
-                                                    ...
+                                                    {quiz.title}
                                                 </Card.Title>
                                                 <Card.Text>
                                                     {quiz.description}

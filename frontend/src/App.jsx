@@ -9,6 +9,8 @@ import CreateQuiz from "./pages/CreateQuiz";
 import AddQuestions from "./pages/AddQuestions";
 import AdminPanel from "./pages/AdminPanel";
 import QuizDetails from "./pages/QuizDetails";
+import AdminQuizDetails from "./pages/AdminQuizDetails";
+import QuizGame from "./pages/QuizGame";
 
 function App() {
     return (
@@ -27,6 +29,11 @@ function App() {
                     path="/myquizes/quiz/questions/:id"
                     element={<AddQuestions />}
                 />
+                <Route
+                    path="/admin/quiz/questions/:id"
+                    element={<AdminQuizDetails />}
+                />
+                <Route path="/quiz/start/:id" element={<QuizGame />} />
             </Routes>
         </Router>
     );

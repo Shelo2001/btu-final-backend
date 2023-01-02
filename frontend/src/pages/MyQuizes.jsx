@@ -101,7 +101,7 @@ const MyQuizes = () => {
                                                     to={`/myquizes/quiz/questions/${quiz.id}`}
                                                 >
                                                     <Button variant="success">
-                                                        Details
+                                                        Add Questions
                                                     </Button>
                                                 </Link>
                                             </Row>

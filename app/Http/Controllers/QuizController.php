@@ -70,9 +70,11 @@ class QuizController extends Controller
     }
 
     public function getQuizDetails($id){
-        $quiz = Quiz::find($id)->first();
+        $quiz = Quiz::where('id',$id)->first();
+        $questions = Quiz::find($id)->Questions;
         return response()->json([
-            "quiz"=>$quiz
+            "quiz"=>$quiz,
+            "questions"=> $questions
         ]);
     }
 

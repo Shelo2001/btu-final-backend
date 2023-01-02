@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\AuthenticationController;
 
 /*
@@ -33,5 +34,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/quiz/delete/{id}',[QuizController::class, 'deleteMyQuizzes']);
     Route::get('/admin/quiz/all',[QuizController::class, 'getAllQuizzesAdmin']);
     Route::get('/admin/quiz/update/{id}',[QuizController::class, 'makeApproved']);
+    Route::post('/quiz/question/create',[QuestionsController::class, 'createQuestion']); 
+    Route::get('/quiz/questions/{quiz}',[QuestionsController::class, 'getQuizQuestions']); 
 
 });

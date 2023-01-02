@@ -6,6 +6,7 @@ import { Col, Form, Row, Container, Image, Button } from "react-bootstrap";
 
 const QuizDetails = () => {
     const [quiz, setQuiz] = useState({});
+    const [questions, setQuestions] = useState({});
     const { id } = useParams();
 
     useEffect(() => {
@@ -15,6 +16,7 @@ const QuizDetails = () => {
             );
 
             setQuiz(data?.quiz);
+            setQuestions(data?.questions);
         };
 
         getQuizDetails();
@@ -33,17 +35,21 @@ const QuizDetails = () => {
                             <p style={{ fontSize: "18px" }}>
                                 Description: {quiz.description}
                             </p>
-
-                            <Button
-                                className="p-2"
-                                style={{
-                                    width: "100%",
-                                    marginTop: "100px",
-                                }}
-                                variant="dark"
-                            >
-                                Start Quiz
-                            </Button>
+                            <p style={{ fontSize: "18px" }}>
+                                Questions: {questions.length}
+                            </p>
+                            <Link to={`/quiz/start/${quiz.id}`}>
+                                <Button
+                                    className="p-2"
+                                    style={{
+                                        width: "100%",
+                                        marginTop: "100px",
+                                    }}
+                                    variant="dark"
+                                >
+                                    Start Quiz
+                                </Button>
+                            </Link>
                         </Col>
                     </Col>
                 </Row>
